@@ -606,7 +606,7 @@ function WorkItemView({ item, onUpdated }: { item: WorkItem; onUpdated?: (update
   });
 
   const richHtmls = [current.description, current.acceptanceCriteria, current.reproSteps, ...(comments ?? [])];
-  const richKey = `${current.id}|${crypto.createHash("sha1").update(richHtmls.filter(Boolean).join(" ")).digest("hex")}`;
+  const richKey = `${current.id}|${crypto.createHash("sha1").update(richHtmls.filter(Boolean).join("\u0000")).digest("hex")}`;
   const media = useProcessedHtmlList(richHtmls, richKey);
 
   const {
